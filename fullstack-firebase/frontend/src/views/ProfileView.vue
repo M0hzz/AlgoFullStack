@@ -1,7 +1,6 @@
 <script setup>
 import BaseLayout from "@/components/BaseLayout.vue";
 </script>
-
 <template>
   <div>
     <h1>Protected Page</h1>

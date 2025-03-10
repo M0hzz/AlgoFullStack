@@ -1,24 +1,23 @@
-const express = require("express");
-const cors = require("cors");
-const { getCollection } = require("./firebase/firestore");
-const { authenticate } = require("./middleware/auth.middleware");
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import admin from "./firebaseAdmin.js";  // Import Firebase setup
 
-require("dotenv").config();
+dotenv.config();
+
 const app = express();
-
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
-// Protected Route Example (Requires Firebase Authentication)
-app.get("/api/algorithms", authenticate, async (req, res) => {
+// Test Firebase Connection
+app.get("/test-firebase", async (req, res) => {
     try {
-        const algorithms = await getCollection("algorithms");
-        res.json(algorithms);
+        const users = await admin.auth().listUsers();
+        res.json({ success: true, users: users.users.length });
     } catch (error) {
-        res.status(500).json({ error: "Failed to fetch algorithms" });
+        res.status(500).json({ error: error.message });
     }
 });
 
-// Start Server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

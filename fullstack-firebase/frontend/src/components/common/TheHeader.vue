@@ -4,7 +4,7 @@
       <div class="logo-container">
         <router-link to="/" class="logo-link">
           <div class="binary-logo">&lt;/&gt;</div>
-          <h1 class="site-title">CodeMatrix</h1>
+          <h1 class="site-title">Algomatics</h1>
         </router-link>
       </div>
 
